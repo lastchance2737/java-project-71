@@ -14,6 +14,10 @@ public class Formatter {
         if (format.equals("plain")) {
             return Plain.getDiff(result);
         }
+
+        if (format.equals("json")) {
+            return Json.getDiff(result);
+        }
         throw new Exception("Incorrect format");
     }
 }

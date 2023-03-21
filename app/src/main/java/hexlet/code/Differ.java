@@ -58,7 +58,6 @@ public class Differ {
             } else {
                 map.put("key", key);
                 map.put("oldValue", data1.get(key));
-                map.put("newValue", data2.get(key));
                 map.put("status", STATUS_UNCHANGED);
             }
             list.add(map);

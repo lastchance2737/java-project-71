@@ -26,7 +26,7 @@ public class Stylish {
                 case "unchanged" -> builder.append("    ")
                         .append(diff.get(TEXT_KEY))
                         .append(": ")
-                        .append(diff.get(TEXT_NEW_VALUE))
+                        .append(diff.get(TEXT_OLD_VALUE))
                         .append("\n");
                 default -> {
                     builder.append("  - ")
