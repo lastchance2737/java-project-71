@@ -12,3 +12,6 @@
 
 ## Step 8
 [asciinema](https://asciinema.org/a/UPcZI2URxhRfb7CltNMi8dUM9)
+
+## Step 9
+[asciinema](https://asciinema.org/a/9M9fxztLlVYYi09v5bJaeGv9V)

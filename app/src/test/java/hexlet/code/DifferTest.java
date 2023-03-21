@@ -7,10 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class DifferTest {
+    private static final String PLAIN_FORMAT = "plain";
+    private static final String STYLISH_FORMAT = "stylish";
+    private static final String INCORRECT_FORMAT = "incorrect-format";
 
     @Test
     public void emptyJSONTest() throws Exception {
-        String result = "{}";
+        String result = "{\n}";
         String filepath1 = "src/test/resources/emptyfile.json";
         String filepath2 = "src/test/resources/emptyfile.json";
         assertEquals(result, Differ.generate(filepath1, filepath2));
@@ -78,8 +81,7 @@ public class DifferTest {
                 }""";
         String filepath1 = "src/test/resources/file3.json";
         String filepath2 = "src/test/resources/file4.json";
-        String format = "stylish";
-        assertEquals(result, Differ.generate(filepath1, filepath2, format));
+        assertEquals(result, Differ.generate(filepath1, filepath2, STYLISH_FORMAT));
     }
 
     @Test
@@ -112,15 +114,55 @@ public class DifferTest {
                 }""";
         String filepath1 = "src/test/resources/file3.yml";
         String filepath2 = "src/test/resources/file4.yaml";
-        String format = "stylish";
-        assertEquals(result, Differ.generate(filepath1, filepath2, format));
+        assertEquals(result, Differ.generate(filepath1, filepath2, STYLISH_FORMAT));
     }
 
     @Test
     public void incorrectFormat() throws Exception {
         String filepath1 = "src/test/resources/file3.yml";
         String filepath2 = "src/test/resources/file4.yaml";
-        String format = "incorrect-format";
-        Assertions.assertThrows(Exception.class, () -> Differ.generate(filepath1, filepath2, format));
+        Assertions.assertThrows(Exception.class, () -> Differ.generate(filepath1, filepath2, INCORRECT_FORMAT));
+    }
+
+    @Test
+    public void plainJSONTest() throws Exception {
+        String result = """
+                Property 'chars2' was updated. From [complex value] to false
+                Property 'checked' was updated. From false to true
+                Property 'default' was updated. From null to [complex value]
+                Property 'id' was updated. From 45 to null
+                Property 'key1' was removed
+                Property 'key2' was added with value: 'value2'
+                Property 'numbers2' was updated. From [complex value] to [complex value]
+                Property 'numbers3' was removed
+                Property 'numbers4' was added with value: [complex value]
+                Property 'obj1' was added with value: [complex value]
+                Property 'setting1' was updated. From 'Some value' to 'Another value'
+                Property 'setting2' was updated. From 200 to 300
+                Property 'setting3' was updated. From true to 'none'""";
+        String filepath1 = "src/test/resources/file3.json";
+        String filepath2 = "src/test/resources/file4.json";
+        assertEquals(result, Differ.generate(filepath1, filepath2, PLAIN_FORMAT));
+    }
+
+    @Test
+    public void plainYAMLTest() throws Exception {
+        String result = """
+                Property 'chars2' was updated. From [complex value] to false
+                Property 'checked' was updated. From false to true
+                Property 'default' was updated. From null to [complex value]
+                Property 'id' was updated. From 45 to null
+                Property 'key1' was removed
+                Property 'key2' was added with value: 'value2'
+                Property 'numbers2' was updated. From [complex value] to [complex value]
+                Property 'numbers3' was removed
+                Property 'numbers4' was added with value: [complex value]
+                Property 'obj1' was added with value: [complex value]
+                Property 'setting1' was updated. From 'Some value' to 'Another value'
+                Property 'setting2' was updated. From 200 to 300
+                Property 'setting3' was updated. From true to 'none'""";
+        String filepath1 = "src/test/resources/file3.yml";
+        String filepath2 = "src/test/resources/file4.yaml";
+        assertEquals(result, Differ.generate(filepath1, filepath2, PLAIN_FORMAT));
     }
 }

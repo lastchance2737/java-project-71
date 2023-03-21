@@ -1,11 +1,18 @@
 package hexlet.code.formatter;
 
+import java.util.List;
 import java.util.Map;
 
 public class Formatter {
-    public static String getDiff(Map<String, Object> data1, Map<String, Object> data2, String format) throws Exception {
+    public static String getDiff(String format,
+                                 List<Map<String, Object>> result) throws Exception {
+
         if (format.equals("stylish")) {
-            return Stylish.getDiff(data1, data2);
+            return Stylish.getDiff(result);
+        }
+
+        if (format.equals("plain")) {
+            return Plain.getDiff(result);
         }
         throw new Exception("Incorrect format");
     }
